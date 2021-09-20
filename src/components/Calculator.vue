@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "Calculator",
   data() {
@@ -30,6 +31,17 @@ export default {
       amount: 0,
       calculated_amount: 0.00
     }
+  },
+  methods: {
+    calculateAmount() {
+      axios.post('https://pennee-api.herokuapp.com/api/calculator/amount', {
+        amount: 100
+      }).then(response => console.log(response))
+      .catch(err => console.log(err.response))
+    },
+  },
+  created() {
+    this.calculateAmount();
   }
 }
 </script>
